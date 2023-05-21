@@ -1,4 +1,6 @@
-// ignore_for_file: iterable_contains_unrelated_type, unnecessary_new
+// ignore_for_file: iterable_contains_unrelated_type, unnecessary_new, unused_element
+
+import 'dart:convert';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -253,6 +255,20 @@ class HomeController extends GetxController implements GetxService {
     update();
   }
 
+  Future<bool?> _checkDevice(fcm) async {
+    bool isExist = false;
+    for (var element in allUser) {
+      if (element["fcm_tokens"] == fcm) {
+        isExist = true;
+        update();
+      } else {
+        isExist = false;
+        update();
+      }
+      return isExist;
+    }
+  }
+
   RxList allUser = [].obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   RxList<DocumentSnapshot> data = <DocumentSnapshot>[].obs;
@@ -263,14 +279,15 @@ class HomeController extends GetxController implements GetxService {
 
     update();
     String fcmToken = await AppShareData.getFcmToken();
+    var addData = {"fcm_tokens": fcmToken};
+    bool? isAdded = await _checkDevice(fcmToken);
     if (allUser.isEmpty) {
-      await users.add({"fcm_tokens": fcmToken});
+      await users.add(addData);
     } else {
-      for (var element in allUser) {
-        if (element["fcm_tokens"] == fcmToken) {
-        } else {
-          await users.add({"fcm_tokens": fcmToken});
-        }
+      if (isAdded!) {
+      } else {
+        // print("new Device");
+        await users.add(addData);
       }
     }
     update();

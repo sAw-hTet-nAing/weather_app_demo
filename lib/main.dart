@@ -21,7 +21,10 @@ void main() async {
   await DBService.initDb();
 
   await FirebaseMessaging.instance.getToken().then((value) async {
-    await AppShareData.setFcmToken(value!);
+    var token = await AppShareData.getFcmToken();
+    if (token == "") {
+      await AppShareData.setFcmToken(value!);
+    }
   });
   await NotiServices.notiInit();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
