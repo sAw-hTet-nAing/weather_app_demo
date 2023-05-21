@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "544071134717",
+    "project_id": "saw-s-weather-app",
+    "storage_bucket": "saw-s-weather-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544071134717:android:32486ba06a22075e8fbd94",
+        "android_client_info": {
+          "package_name": "com.example.weather_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544071134717-thjk7mpabehmt56b1eue4q7k6j20cs7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxrE2ggt1sPZfTYoGtxD1Mu_AAjkK5WSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544071134717-thjk7mpabehmt56b1eue4q7k6j20cs7n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
