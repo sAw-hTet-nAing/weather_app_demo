@@ -20,6 +20,15 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final SearchController _searchController = Get.find<SearchController>();
+  @override
+  void initState() {
+    _searchController.searchTextController.clear();
+    _searchController.isLoading.value = false;
+    _searchController.searchResults.clear();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SearchController>(

@@ -73,7 +73,7 @@ class _SentNotiPageState extends State<SentNotiPage> {
                         ),
                         Center(
                           child: Container(
-                            width: Dimesion.screenWidth * 0.3,
+                            width: Dimesion.screenWidth * 0.8,
                             decoration: BoxDecoration(
                                 color: AppColor.topGr,
                                 borderRadius: BorderRadius.circular(

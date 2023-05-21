@@ -1,6 +1,4 @@
-// ignore_for_file: iterable_contains_unrelated_type, unnecessary_new, unused_element
-
-import 'dart:convert';
+// ignore_for_file: iterable_contains_unrelated_type, unnecessary_new, unused_element, body_might_complete_normally_nullable
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -193,17 +191,20 @@ class HomeController extends GetxController implements GetxService {
   Future<void> delete({required String city}) async {
     await DBService.delete(city);
     await getFav();
+
     if (favList.isEmpty) {
       isFav.value = false;
     } else {
-      for (var element in favList) {
-        if (element.city == city) {
-          isFav.value = false;
-        } else {
-          isFav.value = true;
-        }
+      if (currentWeather.value.location!.name == city) {
+        isFav.value = false;
+
+        update();
+      } else {
+        isFav.value = true;
+        update();
       }
     }
+
     update();
   }
 
@@ -230,7 +231,7 @@ class HomeController extends GetxController implements GetxService {
     if (isExist.isEmpty) {
       addTaskToDB(
           city: city, country: country, lat: lat, long: long, time: time);
-      isFav.value = !isFav.value;
+      isFav.value = true;
 
       await getFav();
       BotToast.showText(text: "Added to Favourite");
@@ -238,9 +239,10 @@ class HomeController extends GetxController implements GetxService {
       for (var element in isExist) {
         if (element["city"] == city) {
           delete(city: city);
-          isFav.value = false;
+          isFav.value = !isFav.value;
           await getFav();
           BotToast.showText(text: "Remove From Favourite");
+          update();
         } else {
           addTaskToDB(
               city: city, country: country, lat: lat, long: long, time: time);
@@ -248,6 +250,7 @@ class HomeController extends GetxController implements GetxService {
 
           await getFav();
           BotToast.showText(text: "Added to Favourite");
+          update();
         }
       }
     }
