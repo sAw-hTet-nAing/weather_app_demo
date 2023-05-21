@@ -43,6 +43,15 @@ class SearchController extends GetxController implements GetxService {
     }
     await AppShareData.setDefaultLat(lat);
     await AppShareData.setDefaultlong(long);
+    for (var element in homeController.favList) {
+      if (element.city == homeController.currentWeather.value.location!.name) {
+        homeController.isFav.value = true;
+        update();
+      } else {
+        homeController.isFav.value = false;
+        update();
+      }
+    }
     Get.snackbar("Success", "Your Default Location Has Changed.",
         backgroundColor: AppColor.topGr, colorText: Colors.white);
     await Get.offNamed(RouteHelper.initial);

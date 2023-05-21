@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "544071134717-khqn26uo8in1fv6pvmjnnsna67hoe5gg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.weather_app",
+            "certificate_hash": "75f32a8594aba76f9ad6d70f9afab28e13d0e4e1"
+          }
+        },
+        {
           "client_id": "544071134717-thjk7mpabehmt56b1eue4q7k6j20cs7n.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "544071134717-thjk7mpabehmt56b1eue4q7k6j20cs7n.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "544071134717-r4jcgdqh8o5cdbkim7e81ekrj7u0etqt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.weatherApp"
+              }
             }
           ]
         }

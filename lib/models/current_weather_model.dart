@@ -32,7 +32,7 @@ class CurrentWeatherModel {
 
 class Current {
   dynamic lastUpdatedEpoch;
-  String? lastUpdated;
+  dynamic lastUpdated;
   dynamic tempC;
   dynamic tempF;
   dynamic isDay;
@@ -174,7 +174,7 @@ class Location {
   dynamic lon;
   String? tzId;
   dynamic localtimeEpoch;
-  String? localtime;
+  dynamic localtime;
 
   Location({
     this.name,

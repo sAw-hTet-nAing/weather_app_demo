@@ -52,7 +52,7 @@ class _MyDrawerPageState extends State<MyDrawerPage> {
                   menuWidget(
                       title: "Send Notification",
                       icon: Icons.notification_add,
-                      onPress: () {})
+                      onPress: () => Get.toNamed(RouteHelper.noti))
                 ]),
               )),
             ));

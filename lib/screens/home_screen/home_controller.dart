@@ -1,9 +1,8 @@
-// ignore_for_file: iterable_contains_unrelated_type
-
-import 'dart:convert';
+// ignore_for_file: iterable_contains_unrelated_type, unnecessary_new
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:geolocator/geolocator.dart';
@@ -11,7 +10,8 @@ import 'package:get/get.dart';
 import 'package:weather_app/models/current_weather_model.dart';
 import 'package:weather_app/models/db_model.dart';
 import 'package:weather_app/models/forecast_weather_model.dart';
-import 'package:weather_app/models/userModel.dart';
+import 'package:weather_app/routes/route_helper.dart';
+
 import 'package:weather_app/screens/home_screen/home_repo.dart';
 import 'package:weather_app/services/db_services.dart';
 import 'package:weather_app/services/share_data_services.dart';
@@ -81,6 +81,35 @@ class HomeController extends GetxController implements GetxService {
         update();
       }
     }
+    isLoading.value = false;
+    update();
+  }
+
+  Future<void> tapFavtoDetail(
+      {required String lat, required String long}) async {
+    isLoading.value = true;
+    update();
+    try {
+      await getCurrentWeather(lat: lat, long: long);
+      await getForecastWeather(lat: lat, long: long);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    await AppShareData.setDefaultLat(lat);
+    await AppShareData.setDefaultlong(long);
+    for (var element in favList) {
+      if (element.city == currentWeather.value.location!.name) {
+        isFav.value = true;
+        update();
+      } else {
+        isFav.value = false;
+        update();
+      }
+      isLoading.value = false;
+      update();
+    }
+
+    await Get.offNamed(RouteHelper.initial);
     isLoading.value = false;
     update();
   }
@@ -246,6 +275,4 @@ class HomeController extends GetxController implements GetxService {
     }
     update();
   }
-
-  getUserData() async {}
 }

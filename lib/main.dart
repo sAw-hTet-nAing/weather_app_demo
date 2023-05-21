@@ -13,13 +13,13 @@ import 'app_binding/app_binding.dart' as dep;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dep.init();
-  await DBService.initDb();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseMessaging.instance.requestPermission();
+  await dep.init();
+  await DBService.initDb();
+
   await FirebaseMessaging.instance.getToken().then((value) async {
     await AppShareData.setFcmToken(value!);
   });
